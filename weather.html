@@ -9,52 +9,54 @@
   </head>
   <body>
     <div>
-      <div>
-        <p>Sunday</p>
-        <p>23 Jun 2022</p>
-        <div>
-          <i class="fa-solid fa-sun"></i>
-          <p>29℃</p>
-          <p>Sunny</p>
+      <div class="today_weather">
+        <div class="today__summary">
+          <p class="day">Sunday</p>
+          <p class="date">23 Jun 2022</p>
+          <div class="location">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Seoul, KR</span>
+          </div>
+        </div>
+        <div class="today_weather__summary">
+          <i class="fa-solid fa-sun today_weather__summary__icon fa-3x"></i>
+          <span class="today_weather__summary__weather">Sunny</span>
+          <p class="today_weather__summary__temperature">29℃</p>
         </div>
       </div>
-      <div>
-        <div><span>PRECIPITATION</span><span>0%</span></div>
-        <div><span>HUMIDITY</span><span>34%</span></div>
-        <div><span>WIND</span><span>0km/h</span></div>
-        <div>
-          <ul>
-            <li>
-              <div>
-                <i class="fa-solid fa-sun"></i>
-                <p>Sun</p>
-                <p>29℃</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <i class="fa-solid fa-cloud"></i>
-                <p>Mon</p>
-                <p>21℃</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <i class="fa-solid fa-cloud-rain"></i>
-                <p>Tue</p>
-                <p>21℃</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <i class="fa-solid fa-cloud-bolt"></i>
-                <p>Wen</p>
-                <p>23℃</p>
-              </div>
-            </li>
-          </ul>
+      <div class="week_weather">
+        <div class="week_weather__text">
+          <span>PRECIPITATION</span><span>0%</span>
         </div>
-        <div>
+        <div class="week_weather__text">
+          <span>HUMIDITY</span><span>34%</span>
+        </div>
+        <div class="week_weather__text">
+          <span>WIND</span><span>0km/h</span>
+        </div>
+        <ul>
+          <li>
+            <i class="fa-solid fa-sun fa-2x"></i>
+            <p>Sun</p>
+            <p>29℃</p>
+          </li>
+          <li>
+            <i class="fa-solid fa-cloud fa-2x"></i>
+            <p>Mon</p>
+            <p>21℃</p>
+          </li>
+          <li>
+            <i class="fa-solid fa-cloud-rain fa-2x"></i>
+            <p>Tue</p>
+            <p>21℃</p>
+          </li>
+          <li>
+            <i class="fa-solid fa-cloud-bolt fa-2x"></i>
+            <p>Wen</p>
+            <p>23℃</p>
+          </li>
+        </ul>
+        <div class="week_weather__change_btn">
           <i class="fa-solid fa-location-dot"></i>
           <span>Change location</span>
         </div>
