@@ -11,17 +11,21 @@
     <div>
       <div class="today_weather">
         <div class="today__summary">
-          <p class="day">Sunday</p>
-          <p class="date">23 Jun 2022</p>
+          <p class="day"></p>
+          <p class="date"></p>
           <div class="location">
             <i class="fa-solid fa-location-dot"></i>
             <span>Seoul, KR</span>
           </div>
         </div>
         <div class="today_weather__summary">
-          <i class="fa-solid fa-sun today_weather__summary__icon fa-3x"></i>
-          <span class="today_weather__summary__weather">Sunny</span>
-          <p class="today_weather__summary__temperature">29℃</p>
+          <!-- <i
+            id="mainIcon"
+            class="fa-solid fa-sun today_weather__summary__icon fa-3x"
+          ></i> -->
+          <div id="mainIcon"><img id="wicon" src="" alt="Weather icon" /></div>
+          <span class="today_weather__summary__weather"></span>
+          <p class="today_weather__summary__temperature"></p>
         </div>
       </div>
       <div class="week_weather">
@@ -62,6 +66,7 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
       src="https://kit.fontawesome.com/c3a0b5f6de.js"
       crossorigin="anonymous"
