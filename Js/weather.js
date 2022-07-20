@@ -30,6 +30,7 @@ const getWeather = function getWeather(){
     console.log(data);
     console.log(data.city.country);
     mainScreen(data);
+    subScreen(data);
   })
 }
 
@@ -55,17 +56,32 @@ function mainScreen(data){
   const screen = document.querySelector(".today_weather");
   day.textContent = date.toLocaleString('en-US',{weekday:'long'});
   todayDate.textContent = `${String(date.getDay()).padStart(2,"0")} ${date.toLocaleString('en-US',{month:'short'})} ${date.getFullYear()}`;
-  location.textContent = data.city.name;
+  location.textContent = `${data.city.name} ${data.city.country}`;
   const iconcode = data.list[0].weather[0].icon
   const url = `http://openweathermap.org/img/w/${iconcode}.png`
   $('#wicon').attr('src', url);
   const weather = data.list[0].weather[0].main
   weatherSummery.textContent = weather;
-  temperature.textContent = `${Math.round(data.list[0].main.temp-273.15,2)}℃`;
-  screen.style.backgroundImage = `url(../img/${weather}Nights.jpg)`;
+  temperature.textContent = `${Math.round(data.list[0].main.temp-273.15,1)}℃`;
+  const hours = date.getHours();
+  let time;
+  if(hours>=6&&hours<17){
+    time = "Morning";
+  } else if(hours>=17&&hours<20){
+    time = "Afternoon";
+  } else{
+    time = "Nights"
+  }
+  screen.style.backgroundImage = `url(../img/${weather}${time}.jpg)`;
 }
-function subScreen(){
-
+function subScreen(data){
+  const precipitation = document.getElementById("precipitation");
+  const humidity = document.querySelector("#humidity");
+  const wind = document.querySelector("#wind");
+  // const humidity = document.querySelector(".")
+  precipitation.textContent = `${data.list[0].pop*100}℃`;
+  humidity.textContent = `${data.list[0].main.humidity}%`;
+  wind.textContent = `${data.list[0].wind.speed}Km/h`
 }
 targetLocation();
 
