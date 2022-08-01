@@ -54,12 +54,11 @@ function mainScreen(data){
   const weatherSummery = document.querySelector(".today_weather__summary__weather");
   const temperature = document.querySelector(".today_weather__summary__temperature");
   const screen = document.querySelector(".today_weather");
+  const mainIcon = document.querySelector(".today_weather__summary__icon");
   day.textContent = date.toLocaleString('en-US',{weekday:'long'});
   todayDate.textContent = `${String(date.getDay()).padStart(2,"0")} ${date.toLocaleString('en-US',{month:'short'})} ${date.getFullYear()}`;
+  console.log(date.getDay())
   location.textContent = `${data.city.name} ${data.city.country}`;
-  const iconcode = data.list[0].weather[0].icon
-  const url = `http://openweathermap.org/img/w/${iconcode}.png`
-  $('#wicon').attr('src', url);
   const weather = data.list[0].weather[0].main
   weatherSummery.textContent = weather;
   temperature.textContent = `${Math.round(data.list[0].main.temp-273.15,1)}℃`;
@@ -67,32 +66,63 @@ function mainScreen(data){
   let time;
   if(hours>=6&&hours<17){
     time = "Morning";
+    paintIcon(data.list[0].weather,mainIcon,0);
   } else if(hours>=17&&hours<20){
     time = "Afternoon";
+    paintIcon(data.list[0].weather,mainIcon,0);
   } else{
     time = "Nights"
+    paintIcon(data.list[0].weather,mainIcon,1);
   }
   screen.style.backgroundImage = `url(../img/${weather}${time}.jpg)`;
 }
 function subScreen(data){
+  console.log(data)
   const precipitation = document.getElementById("precipitation");
   const humidity = document.querySelector("#humidity");
   const wind = document.querySelector("#wind");
   // const humidity = document.querySelector(".")
-  precipitation.textContent = `${data.list[0].pop*100}℃`;
+  precipitation.textContent = `${data.list[0].pop*100}%`;
   humidity.textContent = `${data.list[0].main.humidity}%`;
   wind.textContent = `${data.list[0].wind.speed}Km/h`
+  const LIST = document.querySelectorAll('li');
+  const date = new Date()
+  paintList(data.list[0],LIST[0],date.getDate());
+  paintList(data.list[8],LIST[1],date.getDate()+1);
+  paintList(data.list[16],LIST[2],date.getDate()+2);
+  paintList(data.list[24],LIST[3],date.getDate()+3);
 }
 targetLocation();
 
-// const clock = document.querySelector("#clock");
-// const getClock = function getClock(){
-//     const date = new Date();
-//     const hours = String(date.getHours()).padStart(2,"0");
-//     const minutes = String(date.getMinutes()).padStart(2,"0");
-//     const seconds = String(date.getSeconds()).padStart(2,"0");
-//     clock.innerText = `${hours}:${minutes}:${seconds}`
-// }
+const paintIcon = (data,html,Nights=0) => {
+  const weatherId = Math.floor(data[0].id/100)
+  console.log(weatherId)
+  switch (weatherId) {
+    case 2:
+      html.classList.add('fa-cloud-bolt');
+      break;
+    case 3: case 5:
+      html.classList.add('fa-cloud-rain');
+      break;
+    case 6:
+      html.classList.add('fa-snow-flake');
+      break
+    case 8:
+      if(data[0].id==800){
+        if(Nights)
+        html.classList.add('fa-moon');
+      } else{
+        html.classList.add('fa-sun');
+      }
+      break;
+    default:
+      break;
+  }
+}
 
-// getClock();
-// setInterval(getClock,1000);
+const paintList = (data,html,day)=>{
+  const days = ['Sun','Mon','Tue','Wen','Thu','Fri','Sat']
+  paintIcon(data.weather,html.childNodes[1],1);
+  html.childNodes[2].textContent = days[day];
+  html.childNodes[3].textContent = `${Math.round(data.main.temp-273.15,1)}℃`
+}
